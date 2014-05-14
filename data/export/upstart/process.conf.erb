@@ -11,4 +11,14 @@ setuid <%= user %>
 
 chdir <%= engine.root %>
 
-exec chruby-exec $FOREMAN_RUBY_VERSION -- <%= process.command %>
+#exec chruby-exec $FOREMAN_RUBY_VERSION -- <%= process.command %>
+
+script
+exec /bin/bash << EOT
+  export HOME=/home/<%= user %>
+  source /usr/local/share/chruby/chruby.sh
+  chruby $FOREMAN_RUBY_VERSION
+  exec <%= process.command %>
+EOT
+end script
+
