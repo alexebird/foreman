@@ -11,4 +11,4 @@ setuid <%= user %>
 
 chdir <%= engine.root %>
 
-exec <%= process.command %>
+exec chruby-exec $FOREMAN_RUBY_VERSION -- <%= process.command %>
