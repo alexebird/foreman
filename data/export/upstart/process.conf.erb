@@ -18,7 +18,7 @@ exec /bin/bash << EOT
   export HOME=/home/<%= user %>
   source /usr/local/share/chruby/chruby.sh
   chruby $FOREMAN_RUBY_VERSION
-  exec <%= process.command %>
+  exec <%= process.command %> >> /var/log/<%= app %>/<%= app %>-<%= name %>-<%= num %>.log 2>&1
 EOT
 end script
 
